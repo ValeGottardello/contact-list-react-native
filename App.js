@@ -5,20 +5,9 @@ import Main from './src/components/Main';
 
 export default function App() {
 
-
   return (
     <View style={{marginTop: Constant.statusBarHeight, flexGrow: 1, backgroundColor: '#', alignItems:'center', justifyContent:'center'}}>
       <Main/>
     </View>
   );
 }
-// style you cant use css, native way is use style inline
-// or libraries
-// const styles = StyleSheet.create({* style={styles.container} */}
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
