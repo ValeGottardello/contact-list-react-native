@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableNativeFeedback, Alert } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-web';
+import Constant from 'expo-constants';
+import Main from './src/components/Main';
 
 export default function App() {
+
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{marginTop: Constant.statusBarHeight, flexGrow: 1, backgroundColor: '#', alignItems:'center', justifyContent:'center'}}>
+      <Main/>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// style you cant use css, native way is use style inline
+// or libraries
+// const styles = StyleSheet.create({* style={styles.container} */}
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+// });
