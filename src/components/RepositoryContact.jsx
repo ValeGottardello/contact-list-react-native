@@ -1,30 +1,22 @@
 import React from "react"
-import { View, Text, StyleSheet } from "react-native"
-
+import { View, Text, StyleSheet,TouchableOpacity } from "react-native"
+import StyledText from "./StyledText"
+import StyledView from "./StyledView"
 
 export default function RepositoryContact( props ) {
 
     return (
-        <View key={props.id} style={style.container}>
-            <Text style={style.text}>Contact Name: <Text style={style.name}>{props.firstName} {props.lastName}</Text></Text>
-            <Text>Phone: {props.phone}</Text>
-        </View>
+        <TouchableOpacity>
+            <StyledView key={props.id} containerWrapper>
+                <StyledText label>Contact Name: 
+                    <StyledText name>{props.firstName} {props.lastName}</StyledText>
+                </StyledText>
+                <StyledText phone>Phone: {props.phone}</StyledText>
+            </StyledView>
+        </TouchableOpacity>
     )
 }
 
 const style = StyleSheet.create({
-    container: {
-        padding: 20,
-        backgroundColor: "#fff",
-        alignItems: "center",
-    },
-    text:{
-        color: "#888",
-        fontWeight: "bold",
-    },
-    name:{
-        color: "black",
-        fontWeight: "bold",
-    }
-
+ 
 })

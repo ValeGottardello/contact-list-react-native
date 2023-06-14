@@ -1,15 +1,20 @@
 import React from "react";
-import { Text, View} from "react-native";
+import { NativeRouter, Route, Routes } from 'react-router-native';
+import { View } from "react-native";
+import list from "../data/list.js"
+import AppBar from "./AppBar";
 import ContactList from "./ContactList";
 import ContactImport from "./ContactImport";
-import list from "../data/list.js"
 
 export default function Main () {
+
     return (
-        <View>
-            <Text>Contact List Application</Text>
-            <ContactImport />
-            {/* <ContactList list={list}/> */}
+        <View style={{ flex: 1 }}>
+            <AppBar/>
+            <Routes>
+                <Route path="/" element={<ContactList list={list}/>} />
+                <Route path="/import" element={<ContactImport />} />
+            </Routes>   
         </View>
     )
 }

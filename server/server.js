@@ -1,29 +1,47 @@
 const express = require("express")
 const app = express()
 const config = require("./config")
+const errorHandler = require("./middleware/error_handler")
 
-app.get("/contacts", validateId, (req, res, next) => {
-    Note.findOneById(req.params.id)
-      .then(note => res.json(note))
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  next();
+});
+
+app.get("/contacts", (req, res, next) => {
+    Contacts.findAll()
+      .then(data => res.json(data))
       .catch(next)
 })
   
-app.post("/contacts/:id", validateNewNote, (req, res, next) => {
-    Note.create({ content: req.body.content, color: req.body.color })
-      .then(note => res.json(note))
+app.post("/contacts", (req, res, next) => {
+    const { firstName, lastName, email, phone } = req.body
+    Contacts.create(firstName, lastName, email, phone)
+      .then(data => res.json(data))
       .catch(next)
 })
   
 app.delete("/contacts/:id", (req, res, next) => {
+
     const { id } = req.params
-    Note.destroy(id)
-      .then(() => res.json({ message: `note with id ${id} has been removed` }))
+
+    Contacts.delete(id)
+      .then(data => res.json(data))
       .catch(next)
 })
   
 app.put("contacts/:id", (req, res, next) => {
-    Note.update(req.params.id, req.body)
+    
+    Contacts.update(req.params.id, req.body)
       .then(note => res.json(note))
       .catch(next)
 })
+
+app.use(errorHandler)
   
+app.listen(config.port, () => {
+    console.log(`listening on port ${config.port}`)
+})
