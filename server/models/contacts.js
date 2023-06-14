@@ -1,15 +1,15 @@
-const query = require("../db")
+const db = require("../db")
 
 class Contact {
     static findAll() {
-        return query('select * from contacts;')
+        return db.query('select * from contacts;')
             .then(res => res.rows)
     }
 
     static findOneById(id) {
 
         const sql = 'select * from contacts where id = $1;'
-        return query(sql, [id])
+        return db.query(sql, [id])
             .then(res => {
                 {
                     if (res.rows.length === 0) {
@@ -20,27 +20,33 @@ class Contact {
             })
     }
 
-    static create(firstName, lastName, email, phone) {
-        let sql = 'insert into contacts (firstName, lastName, email, phone) values ($1, $2, $3, $4) returning *;'
+    static create(contacts) {
 
-        return query(sql, [firstName, lastName, email, phone])
-                .then(res => res.rows[0])
-    }
-
-    static update(contact) {
+        let sql = 'insert into contacts (firstName, lastName, email, phone) VALUES '
+        const values = contacts.map((contact, index) => `($${index * 4 + 1}, $${index * 4 + 2}, $${index * 4 + 3}, $${index * 4 + 4})`).join(', ')
+        sql += values
+        sql += ' RETURNING *;'
+      
+        const params = contacts.flatMap(contact => [contact.firstName, contact.lastName, contact.email, contact.phone])
+      
+        return db.query(sql, params)
+          .then(res => res.rows)
+      }
+      
+    static update(firstName, lastName, email, phone) {
 
         const sql = 'update contacts set firstName = COALESCE($1, firstName), lastName = COALESCE($2, lastName), email = COALESCE($3, email), phone = COALESCE($4, phone) WHERE id = $5 returning *;'
-        return query(sql, [contact.firstName, contact.lastName, contact.email, contact.phone, contact.id])
+        return db.query(sql, [firstName, lastName, email, phone])
         .then(res => res.rows[0]);
     }
 
     static delete(id) {
 
         const sql = 'delete from contacts where id = $1 returning *;'
-        return query(sql, [id])
+        return db.query(sql, [id])
     }
 }
 
-export default Contact
+module.exports = Contact
 
 

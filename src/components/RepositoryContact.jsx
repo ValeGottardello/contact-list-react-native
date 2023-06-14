@@ -9,7 +9,7 @@ export default function RepositoryContact( props ) {
         <TouchableOpacity>
             <StyledView key={props.id} containerWrapper>
                 <StyledText label>Contact Name: 
-                    <StyledText name>{props.firstName} {props.lastName}</StyledText>
+                    <StyledText name>{props.firstname} {props.lastname}</StyledText>
                 </StyledText>
                 <StyledText phone>Phone: {props.phone}</StyledText>
             </StyledView>
@@ -17,6 +17,3 @@ export default function RepositoryContact( props ) {
     )
 }
 
-const style = StyleSheet.create({
- 
-})

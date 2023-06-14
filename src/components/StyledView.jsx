@@ -17,9 +17,6 @@ const styles = StyleSheet.create({
     },
 })
 
-
-
-
 export default function StyledView ({ containerWrapper, containerButton, children }) {
 
     const stylesContainer = [

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, Button, TouchableOpacity } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
 import convertToContacts from "../utils/convertToContacts"
 import saveImpContacts from "../utils/saveImpContacts";
@@ -17,7 +17,8 @@ export default function ContactImport() {
                 const vCardText = await fetch(uri).then((response) => response.text())
 
                 const contacts = convertToContacts(vCardText)
-
+                
+                console.log(contacts)
                 if (contacts) {
                     saveImpContacts(contacts)
                 }

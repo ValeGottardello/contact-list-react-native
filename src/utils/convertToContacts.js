@@ -11,12 +11,12 @@ export default function convertToContacts(vCardText) {
 
         const [key, value] = line.split(':')
         if (key && value) {
-          const trimmedKey = key.trim()
-          const trimmedValue = value.trim()
+          const trimmedKey = key.trim().split(";")[0]
+          const trimmedValue = value.trim().split("").slice(0,value.length - 1).join("")
           if (trimmedKey === 'FN') {
             const [firstName, lastName] = trimmedValue.split(' ')
             contact.firstName = firstName || ''
-            contact.lastName = lastName.split("").slice(0,lastName.length - 1).join("") || ''
+            contact.lastName = lastName || ''
           } else if (trimmedKey === 'EMAIL') {
             contact.email = trimmedValue || ''
           } else if (trimmedKey === 'TEL') {
@@ -26,6 +26,6 @@ export default function convertToContacts(vCardText) {
       })
       return contact
     })
-
+  // console.log(contacts)
   return contacts
 }

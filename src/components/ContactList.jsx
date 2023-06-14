@@ -3,28 +3,43 @@ import { View, Text, FlatList } from "react-native";
 import RepositoryContact from "./RepositoryContact";
 import getContacts from "../utils/getContacts";
 
-const ContactList = ({ list }) => {
+const ContactList = () => {
    
-    // const [list, setList] = useState([])
+  const [list, setList] = useState([])
+  
+  const fetchContacts = async () => {
+      try {
 
-    // const fetchContacts = () => {
-    //     getContacts()
-    //       .then(res => setList(res))
-    // }
+        const res = await getContacts()
+        
+        if(res) {
+          setList(res)
+        }
 
-    // useEffect(() => {
-    //     fetchContacts()
-    // }, [])
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    useEffect(() => {
+        fetchContacts()
+    }, [])
 
     return (
-        <FlatList data={list}
-                ItemSeparatorComponent={() => <View style={{height: 3, backgroundColor: "#CED0CE"}}/>}    
-                keyExtractor={(item) => item.id.toString()} 
-                renderItem={({ item: contact }) => ( 
-                    <RepositoryContact {...contact} />
-                )}
-        /> 
-           
+      <>
+        {list && list.length === 0 ? (
+        <Text>Loading...</Text>
+        ) : (
+          <FlatList
+            data={list}
+            ItemSeparatorComponent={() => <View style={{ height: 3, backgroundColor: "#CED0CE" }} />}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item: contacts }) => (
+              <RepositoryContact {...contacts} />
+            )}
+          />
+        )}
+      </>
     )
 }
 export default ContactList;

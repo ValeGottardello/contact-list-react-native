@@ -1,14 +1,9 @@
 export default async function getContacts () {
-    try {
-        const allContacts = await fetch('http://localhost:3001/contacts')
-
-        const contacts = await allContacts.json()  
-         console.log(contacts)
-        return contacts
-      
-      } catch (error) {
-
-        console.error('Error gettings contacts:', error)
-        return []
-      }
+    return fetch(`http://localhost:8080/contacts`)
+        .then(res => res.json())
+        .then(data => data)
+        .catch(error => {
+            console.error('Error to save the important contacts:', error)
+            return []
+        })
 }

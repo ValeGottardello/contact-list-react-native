@@ -39,5 +39,6 @@
       "standard-jsx",
       "standard-react"
     ]
-  }
+  },
+  "proxy": "http://localhost:8080/"
 }
