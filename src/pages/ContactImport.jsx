@@ -33,7 +33,6 @@ export default function ContactImport() {
         <StyledView containerButton>
             <TouchableOpacity>
                 <Button
-                    style={{width: 'fit-content'}}
                     color={theme.language.backgroundColor}
                     onPress={handleImportContacts}
                     title="Import your contacts"

@@ -11,12 +11,10 @@ class Contact {
         const sql = 'select * from contacts where id = $1;'
         return db.query(sql, [id])
             .then(res => {
-                {
-                    if (res.rows.length === 0) {
-                        throw new Error(404, 'record not found')
-                    }
-                    return res.rows[0]
+                if (res.rows.length === 0) {
+                    throw new Error(404, 'record not found')
                 }
+                return res.rows[0]
             })
     }
 
@@ -33,11 +31,11 @@ class Contact {
           .then(res => res.rows)
       }
       
-    static update(firstName, lastName, email, phone) {
+    static update(id, { firstName, lastName, email, phone }) {
 
-        const sql = 'update contacts set firstName = COALESCE($1, firstName), lastName = COALESCE($2, lastName), email = COALESCE($3, email), phone = COALESCE($4, phone) WHERE id = $5 returning *;'
-        return db.query(sql, [firstName, lastName, email, phone])
-        .then(res => res.rows[0]);
+        const sql = 'update contacts set firstName = $1, lastName = $2, email = $3, phone = $4 WHERE id = $5 returning *;'
+        return db.query(sql, [firstName, lastName, email, phone, id])
+            .then(res => res.rows[0]);
     }
 
     static delete(id) {

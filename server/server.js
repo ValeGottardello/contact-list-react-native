@@ -13,12 +13,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   next();
 })
-// app.use(express.urlencoded({ extended: true }))
-// app.use(cors({
-//     // origin: process.env.REACT_APP_CLIENT_URL,
-//     origin: 'http://localhost:19006/',
-//     methods: ['GET', 'POST', 'PUT', 'DELETE']
-// }));
+app.use(cors())
 
 app.get("/contacts", (req, res, next) => {
     Contacts.findAll()
@@ -27,7 +22,7 @@ app.get("/contacts", (req, res, next) => {
 })
   
 app.post("/contacts", (req, res, next) => {
-console.log(req.body)
+
     Contacts.create(req.body)
       .then(data => res.json(data))
       .catch(next)
@@ -36,16 +31,15 @@ console.log(req.body)
 app.delete("/contacts/:id", (req, res, next) => {
 
     const { id } = req.params
-
     Contacts.delete(id)
       .then(data => res.json(data))
       .catch(next)
 })
   
-app.put("contacts/:id", (req, res, next) => {
-    
+app.put("/contacts/:id", (req, res, next) => {
+  const { id } = req.params
     Contacts.update(req.params.id, req.body)
-      .then(note => res.json(note))
+      .then(data => res.json(data))
       .catch(next)
 })
 

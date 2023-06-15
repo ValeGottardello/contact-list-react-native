@@ -9,9 +9,7 @@ import { Link } from "react-router-native"
 export default function ContactDetails () {
     
     const location = useLocation()
-
-    const { name, lastname, phone, email } = location.state
-
+    const { firstName, lastName, phone, email } = location.state
     const { id } = useParams()
 
 
@@ -23,15 +21,15 @@ export default function ContactDetails () {
         <ScrollView>
             <View style={theme.detailsWrapper} key={id}>
                 <View style={theme.detailsCointainer}>
-                    <Text style={{fontSize: 25, color: theme.colors.primary, textTransform: 'uppercase', fontWeight: 'bold'}}>Contact Details: </Text>
+                    <Text style={{fontSize: 20, color: theme.colors.primary, textTransform: 'uppercase', fontWeight: 'bold'}}>Contact Details: </Text>
                 </View>
                 <View style={theme.detailsCointainer}>
                     <Text style={theme.detailsLabel}>First Name:</Text>
-                    <Text style={theme.detailsText}> {name} </Text>
+                    <Text style={theme.detailsText}> {firstName} </Text>
                 </View>
                 <View style={theme.detailsCointainer}>                       
                     <Text style={theme.detailsLabel}>Last Name:</Text>
-                    <Text style={theme.detailsText}> {lastname} </Text>
+                    <Text style={theme.detailsText}> {lastName} </Text>
                 </View>
                 <View style={theme.detailsCointainer}>
                     <Text style={theme.detailsLabel}>Phone: </Text>
@@ -42,22 +40,45 @@ export default function ContactDetails () {
                     <Text style={theme.detailsText}>{phone}</Text> 
                 </View>
             </View>
-            <StyledView>
-                <StyledView containerButton>   
-                    <Link to={'/contacts/edit/:id'} state={{ name: name, lastname: lastname, phone: phone, email: email}} >
-                        <Text>
+            <View style={style.container}>
+                <View style={style.buttonWrapper}>   
+                    <Link to={`/contacts/edit/${id}`} state={{ name: firstName, lastname: lastName, phone: phone, email: email}}  style={style.buttons}>
+                        <Text style={style.buttonText}>
                             Edit
                         </Text>
                     </Link> 
-                </StyledView>
-                <TouchableHighlight>
-                    <StyledView containerButton>   
-                        <Text>
+                </View>
+                <View style={style.buttonWrapper}>   
+                    <TouchableHighlight>
+                        <Text style={style.buttonText}>
                             Delete
                         </Text>
-                    </StyledView>
-                </TouchableHighlight>
-            </StyledView>
+                    </TouchableHighlight>
+                </View>
+            </View>
         </ScrollView>
     )
+}
+
+
+const style = {
+    container: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    buttonWrapper: {
+        backgroundColor: theme.colors.primary,
+        width: '30%',
+        padding: 10,
+        textAlign: 'center',
+        borderRadius: 10,
+        marginTop: 30,
+        justifyContent: 'center',
+    },
+    buttonText: {
+        color: theme.colors.tertiary, 
+        fontWeight:'bold', 
+        textAlign:'center', 
+        alignItems:'center'
+    }
 }

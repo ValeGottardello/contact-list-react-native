@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
         fontSize: theme.fontSizes.subheading,
         borderRadius: 5,
     }
+  
 })
 
 const AppBarTab = ({active, children, to}) => {

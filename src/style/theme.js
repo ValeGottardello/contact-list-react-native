@@ -42,13 +42,12 @@ const theme = {
         fontWeight: 'bold',
         fontSize: 16,
         textAlign: 'left',
-
     },
     detailsText: {
         textAlign: 'center',
         color: '#586069',
         fontSize: 16,
-        paddingTop: 10,
+        paddingTop: 5,
     },
     detailsCointainer : {
         borderBottomWidth: 2,

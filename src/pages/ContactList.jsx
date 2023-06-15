@@ -1,43 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList } from "react-native";
 import RepositoryContact from "../components/RepositoryContact";
-import getContacts from "../utils/getContacts";
+import StyledText from "../components/StyledText";
+import useContacts from "../hooks/useContacts";
 
 const ContactList = () => {
    
-  const [list, setList] = useState([])
-  
-  const fetchContacts = async () => {
-      try {
-
-        const res = await getContacts()
-        
-        if(res) {
-          setList(res)
-        }
-
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    useEffect(() => {
-        fetchContacts()
-    }, [])
+    const contacts = useContacts()
 
     return (
       <>
-        {list && list.length === 0 ? (
-        <Text>Loading...</Text>
+        {contacts.length === 0 ? (
+          <StyledText title>No imported contacts</StyledText>
         ) : (
-          <FlatList
-            data={list}
+          !contacts ? (
+            <StyledText title>Loading...</StyledText>
+          ) : (
+            <FlatList
+            data={contacts}
             ItemSeparatorComponent={() => <View style={{ height: 3, backgroundColor: "#CED0CE" }} />}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item: contacts }) => (
-              <RepositoryContact {...contacts} />
+            renderItem={({ item: contact }) => (
+              <RepositoryContact {...contact} />
             )}
           />
+          )
         )}
       </>
     )

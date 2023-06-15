@@ -5,7 +5,7 @@ CREATE TABLE contacts (
     firstName TEXT,
     lastName TEXT,
     email TEXT,
-    phone bigint
+    phone TEXT
 );
 
 -- insert into contacts (firstName, lastName, email, phone) values ('John', 'Vlues', 'john@hotmail.com', 1122223333) returning *;

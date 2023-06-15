@@ -2,8 +2,7 @@
 
 export default async function saveImpContacts(importedContacts) {
     
-
-    return fetch(`http://localhost:8080/contacts`, {
+    return globalThis.fetch(`http://192.168.20.2:8080/contacts`, {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',            
@@ -13,7 +12,7 @@ export default async function saveImpContacts(importedContacts) {
                 .then(response => response.json())
                 .then(data => console.log(data))
                 .catch(error => {
-                console.error('Error to save the important contacts:', error)
+                console.error('Error to save the imported contacts:', error)
                 return []
                 })
 }

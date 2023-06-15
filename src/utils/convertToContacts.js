@@ -26,6 +26,6 @@ export default function convertToContacts(vCardText) {
       })
       return contact
     })
-  // console.log(contacts)
+
   return contacts
 }
