@@ -19,17 +19,12 @@ export default function ContactEdit() {
     const [contactEdited, setContactEdited] = useState({})
 
     const handleChange = (value, name) => {
-        console.log("222: ", {value, name})
+
         setInput(prevState => ({
             ...prevState,
             [name]: value,
-        }));
+        }))
     }
-
-    useEffect(() => {
-        console.log("changeddd: ", input)
-
-    }, [input])
 
     const handleSubmit = async () => {
         const contactEdited = await editContact(id, input)
