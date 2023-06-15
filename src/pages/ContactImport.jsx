@@ -3,7 +3,8 @@ import { View, Text, Button, TouchableOpacity } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
 import convertToContacts from "../utils/convertToContacts"
 import saveImpContacts from "../utils/saveImpContacts";
-import StyledView from "./StyledView";
+import StyledView from "../components/StyledView";
+import theme from "../style/theme";
 
 export default function ContactImport() {
     
@@ -32,7 +33,8 @@ export default function ContactImport() {
         <StyledView containerButton>
             <TouchableOpacity>
                 <Button
-                    color="#415a77"
+                    style={{width: 'fit-content'}}
+                    color={theme.language.backgroundColor}
                     onPress={handleImportContacts}
                     title="Import your contacts"
                     accessibilityLabel="Press this button to import contacts from your device"

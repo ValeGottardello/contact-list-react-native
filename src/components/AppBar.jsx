@@ -9,7 +9,7 @@ import { Link } from "react-router-native";
 const styles = StyleSheet.create({
     appBar: {
         paddingTop: Constants.statusBarHeight,
-        backgroundColor: theme.colors.tertiary,
+        backgroundColor: theme.language.backgroundColor,
         flexDirection: "row",
         justifyContent: "space-around",
         alignItems: "center",
@@ -36,7 +36,7 @@ const AppBar = () => {
     return (
         <View style={styles.appBar}>
             <AppBarTab active to='/'>Contacts</AppBarTab>
-            <AppBarTab active to='/import'>Import</AppBarTab>
+            <AppBarTab active to='/contacts/import'>Import</AppBarTab>
         </View>
     )
 }

@@ -1,3 +1,5 @@
+import { Platform } from 'react-native'
+
 const theme = {
     colors: {
         textPrimary: '#24292e',
@@ -21,6 +23,37 @@ const theme = {
         center: 'center',
         left: 'left',
         right: 'right'
+    },
+    language: {
+        backgroundColor: Platform.select({
+            ios:  '#e5e5e5',
+            android: '#e5e5e5',
+            default: '#778da9',
+        })
+    },
+    detailsWrapper: {
+        marginTop: 30,
+        gap: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    detailsLabel: {
+        color: '#24292e',
+        fontWeight: 'bold',
+        fontSize: 16,
+        textAlign: 'left',
+
+    },
+    detailsText: {
+        textAlign: 'center',
+        color: '#586069',
+        fontSize: 16,
+        paddingTop: 10,
+    },
+    detailsCointainer : {
+        borderBottomWidth: 2,
+        borderBottomColor: '#778da9',
+        padding: 20,
     }
 }
 

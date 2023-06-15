@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList } from "react-native";
-import RepositoryContact from "./RepositoryContact";
+import RepositoryContact from "../components/RepositoryContact";
 import getContacts from "../utils/getContacts";
 
 const ContactList = () => {
