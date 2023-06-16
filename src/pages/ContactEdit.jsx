@@ -1,10 +1,11 @@
 import StyledView from "../components/StyledView";
-import { Text, View, Button, TextInput } from "react-native";
+import { Text, View, Button, TextInput, TouchableHighlight } from "react-native";
 import { useLocation, useParams } from "react-router-native";
 import theme from "../style/theme";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import editContact from "../utils/editContact";
-
+import Message from "../components/Message";
+import StyledText from "../components/StyledText";
 
 export default function ContactEdit() {
 
@@ -16,7 +17,6 @@ export default function ContactEdit() {
         phone, 
         email })
     const { id } = useParams()
-    const [contactEdited, setContactEdited] = useState({})
 
     const handleChange = (value, name) => {
 
@@ -29,7 +29,7 @@ export default function ContactEdit() {
     const handleSubmit = async () => {
         const contactEdited = await editContact(id, input)
         if (contactEdited) {
-            setContactEdited(contactEdited)
+            Message('Contact Edited', 'Contact has been edited')
         }
     }
 
@@ -39,32 +39,36 @@ export default function ContactEdit() {
             <View style={theme.detailsCointainer}>
                 <Text style={theme.detailsLabel}>First Name:</Text>
                 <TextInput 
-                    value={input.firstName}
+                    value={input.firstName ? input.firstName : ""}
                     style={style.input} 
                     onChangeText={value => handleChange(value, 'firstName')}
                 />
                 <Text style={theme.detailsLabel}>Last Name:</Text>
                 <TextInput 
-                    value={input.lastName}
+                    value={input.lastName ? input.lastName : ""}
                     style={style.input} 
                     onChangeText={value => handleChange(value, 'lastName')}
                 />
                 <Text style={theme.detailsLabel}>Email:</Text>
                 <TextInput 
-                    value={input.email}
+                    value={input.email ? input.email : ""} 
                     style={style.input} 
                     onChangeText={value => handleChange(value, 'email')}
                 />
                 <Text style={theme.detailsLabel}>Phone:</Text>
                 <TextInput 
-                    value={input.phone}
+                    value={input.phone ? input.phone : ""}
                     keyboardType="numeric"
                     style={style.input} 
                     onChangeText={value => handleChange(value, 'phone')}
                 />
-                <Button
-                    title="Save"
-                    onPress={handleSubmit}/>
+                <TouchableHighlight  
+                    style={theme.buttons}
+                    onPress={handleSubmit} >
+                    <StyledText label>
+                        Save
+                    </StyledText> 
+                </TouchableHighlight>    
             </View>
         </StyledView>
     )

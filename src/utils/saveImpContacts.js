@@ -10,9 +10,8 @@ export default async function saveImpContacts(importedContacts) {
                 body: JSON.stringify(importedContacts)
                 })
                 .then(response => response.json())
-                .then(data => console.log(data))
                 .catch(error => {
-                console.error('Error to save the imported contacts:', error)
-                return []
+                    console.error('Error to save the imported contacts:', error)
+                    return []
                 })
 }

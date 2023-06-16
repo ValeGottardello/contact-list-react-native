@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { View, Text, Button, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
 import convertToContacts from "../utils/convertToContacts"
 import saveImpContacts from "../utils/saveImpContacts";
-import StyledView from "../components/StyledView";
 import theme from "../style/theme";
+import StyledText from "../components/StyledText";
 
 export default function ContactImport() {
     
@@ -19,7 +18,6 @@ export default function ContactImport() {
 
                 const contacts = convertToContacts(vCardText)
                 
-                console.log(contacts)
                 if (contacts) {
                     saveImpContacts(contacts)
                 }
@@ -30,16 +28,15 @@ export default function ContactImport() {
     }
 
     return (
-        <StyledView containerButton>
-            <TouchableOpacity>
-                <Button
-                    color={theme.language.backgroundColor}
-                    onPress={handleImportContacts}
-                    title="Import your contacts"
-                    accessibilityLabel="Press this button to import contacts from your device"
-                    />
+        <View style={{alignItems:'center', marginTop: 20}}>
+            <TouchableOpacity 
+                style={theme.buttons}
+                onPress={handleImportContacts}>
+                <StyledText label>
+                    Import contacts
+                </StyledText>
             </TouchableOpacity>
-        </StyledView>
+        </View>
     )
 }
 

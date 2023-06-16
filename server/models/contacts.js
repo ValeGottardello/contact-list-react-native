@@ -2,22 +2,15 @@ const db = require("../db")
 
 class Contact {
     static findAll() {
-        return db.query('select * from contacts;')
-            .then(res => res.rows)
-    }
-
-    static findOneById(id) {
-
-        const sql = 'select * from contacts where id = $1;'
-        return db.query(sql, [id])
+        return db.query('select * from contacts where active = true;')
             .then(res => {
-                if (res.rows.length === 0) {
-                    throw new Error(404, 'record not found')
+                if (!res.rows) {
+                    throw new Error(`No records found`)
                 }
-                return res.rows[0]
+                return res.rows
             })
     }
-
+    
     static create(contacts) {
 
         let sql = 'insert into contacts (firstName, lastName, email, phone) VALUES '
@@ -28,20 +21,31 @@ class Contact {
         const params = contacts.flatMap(contact => [contact.firstName, contact.lastName, contact.email, contact.phone])
       
         return db.query(sql, params)
-          .then(res => res.rows)
+          .then(res => res.rows[0])
       }
       
     static update(id, { firstName, lastName, email, phone }) {
 
         const sql = 'update contacts set firstName = $1, lastName = $2, email = $3, phone = $4 WHERE id = $5 returning *;'
         return db.query(sql, [firstName, lastName, email, phone, id])
-            .then(res => res.rows[0]);
+            .then(res => {
+                if (res.rows.length === 0) {
+                    throw new Error(`Contact with id ${id} not found`)
+                }
+                return res.rows[0]
+            })
     }
 
     static delete(id) {
 
-        const sql = 'delete from contacts where id = $1 returning *;'
+        const sql = 'update contacts set active = false WHERE id = $1 returning *;'
         return db.query(sql, [id])
+                .then(res => {
+                    if (res.rows.length === 0) {
+                        throw new Error(`Contact with id ${id} not found`)
+                    }
+                    return res.rows[0]
+                })
     }
 }
 

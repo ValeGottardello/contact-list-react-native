@@ -8,13 +8,14 @@ import ContactImport from "../pages/ContactImport";
 import ContactDetails from "../pages/ContactDetails";
 import ContactEdit from "../pages/ContactEdit";
 
+
 export default function Main () {
 
     return (
         <View style={{ flex: 1 }}>
             <AppBar/>
             <Routes>
-                <Route path="/" element={<ContactList list={list}/>} />
+                <Route path="/" element={<ContactList />} />
                 <Route path="/contacts/import" element={<ContactImport />} />
                 <Route path="/contacts/:id" element={<ContactDetails />} />
                 <Route path="/contacts/edit/:id" element={<ContactEdit />} />

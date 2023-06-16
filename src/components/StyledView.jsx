@@ -21,16 +21,23 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "center",
+    },
+    barSearch: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 5,
     }
 })
 
-export default function StyledView ({ containerWrapper, containerButton, containerDetails,children }) {
+export default function StyledView ({ containerWrapper, containerButton, containerDetails, barSearch, children }) {
 
     const stylesContainer = [
         containerWrapper && styles.containerWrapper,
         containerButton && styles.containerButton,
         containerWrapper && styles.containerWrapper,
         containerDetails && styles.containerDetails,
+        barSearch && styles.barSearch,
     ]
 
     return (

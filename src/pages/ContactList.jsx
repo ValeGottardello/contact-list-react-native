@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { View, FlatList, TextInput, Button } from "react-native";
+import { View, FlatList, TextInput, Text,TouchableHighlight } from "react-native";
 import RepositoryContact from "../components/RepositoryContact";
 import StyledText from "../components/StyledText";
+import StyledView from "../components/StyledView";
 import fetchContacts from "../utils/fetchContacts";
 import theme from "../style/theme";
 
@@ -18,7 +19,7 @@ const ContactList = () => {
         setContacts(data)
       })  
       .catch((error) => console.log(error))
-      
+
   }, [])
 
   const handleOrder = () => {
@@ -34,8 +35,6 @@ const ContactList = () => {
         if (nameA > nameB) {
           return 1
         }
-      } else {
-        return 0
       }
        return 0
     })
@@ -45,12 +44,13 @@ const ContactList = () => {
   const handleSearchBar = (text) => {
 
     const filteredContacts = contacts.filter((contact) => {
-
-        const contactName = contact.firstname.toUpperCase()
-        const contactLastName = contact.lastname.toUpperCase()
-        const contactEmail = contact.email.toUpperCase()
-        const textData = text.toUpperCase()
-        return contactName.includes(textData) || contactLastName.includes(textData) || contactEmail.includes(textData)
+        if (contact.firstname && contact.lastname && contact.email) {
+          const contactName = contact.firstname.toUpperCase()
+          const contactLastName = contact.lastname.toUpperCase()
+          const contactEmail = contact.email.toUpperCase()
+          const textData = text.toUpperCase()
+          return contactName.includes(textData) || contactLastName.includes(textData) || contactEmail.includes(textData)
+        }
     })
 
     setFilContacts([...filteredContacts])
@@ -59,21 +59,26 @@ const ContactList = () => {
   return (
     <>
       <View>
-        <Button 
-          style={theme.detailsCointainer}
-          title="Order alphabetically"
-          onPress={handleOrder}/>
-
-        <TextInput 
-          style={style.input}
-          onChangeText={handleSearchBar}/>
-
+        <StyledText subtitle>Search</StyledText>
+        <StyledView barSearch>
+          <TextInput 
+            style={style.input}
+            onChangeText={handleSearchBar}
+            placeholder="John Smith"/>
+          <TouchableHighlight 
+            style={theme.buttons}
+            onPress={handleOrder}>
+              <Text>
+                Order alphabetically
+              </Text>
+          </TouchableHighlight>
+        </StyledView>
       </View>
       {filContacts.length === 0 ? (
         <StyledText title>No imported contacts</StyledText>
       ) : (
         !filContacts ? (
-          <StyledText title>Loading...</StyledText>
+          <StyledText label>Loading...</StyledText>
         ) : (
           <FlatList
             data={filContacts}
@@ -96,8 +101,8 @@ const style = {
       borderWidth: 1,
       borderColor: theme.colors.primary,
       padding: 8,
-      margin: 10,
-      width: 200,
+      marginHorizontal: 10,
+      width: '40%',
       borderRadius: 5,
       color: theme.colors.primary,
   }

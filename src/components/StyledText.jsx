@@ -25,17 +25,25 @@ const styles = StyleSheet.create({
         fontWeight: theme.fontWeights.bold,
         marginTop: 50,
         textAlign: theme.textAlign.center,
+    },
+    subtitle: {
+        fontSize: theme.fontSizes.subheading,
+        color: theme.colors.textSecondary,
+        textTransform: "uppercase",
+        textAlign: theme.textAlign.center,
+        marginTop: 20,
     }
 })
 
 
-export default function StyledText ({ label, name, phone, children, title }) {
+export default function StyledText ({ label, name, phone, children, title, subtitle }) {
 
     const stylesText = [
         label && styles.label,
         name && styles.name,
         phone && styles.phone,
         title && styles.title,
+        subtitle && styles.subtitle,
     ]
 
     return (

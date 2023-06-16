@@ -5,7 +5,8 @@ CREATE TABLE contacts (
     firstName TEXT,
     lastName TEXT,
     email TEXT,
-    phone TEXT
+    phone TEXT,
+    active BOOLEAN DEFAULT true
 );
 
 -- insert into contacts (firstName, lastName, email, phone) values ('John', 'Vlues', 'john@hotmail.com', 1122223333) returning *;

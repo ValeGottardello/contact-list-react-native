@@ -53,6 +53,19 @@ const theme = {
         borderBottomWidth: 2,
         borderBottomColor: '#778da9',
         padding: 20,
+    },
+    buttons : {
+        backgroundColor: '#edede9',
+        color: '1b263b', 
+        fontSize: 20,
+        alignSelf:'center',
+        alignItems:'center',
+        borderWidth: 2,
+        width: '40%',
+        borderColor: '#e5e5e5',
+        borderRadius: 5,
+        padding: 8,
+        margin: 15
     }
 }
 
