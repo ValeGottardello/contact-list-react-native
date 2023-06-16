@@ -64,7 +64,7 @@ const ContactList = () => {
           <TextInput 
             style={style.input}
             onChangeText={handleSearchBar}
-            placeholder="John Smith"/>
+            placeholder="John Smith or j@example.com"/>
           <TouchableHighlight 
             style={theme.buttons}
             onPress={handleOrder}>
