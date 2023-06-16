@@ -1,6 +1,24 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import theme from '../style/theme'
+
+export default function StyledView ({ containerWrapper, containerButton, containerDetails, barSearch, children }) {
+
+    const stylesContainer = [
+        containerWrapper && styles.containerWrapper,
+        containerButton && styles.containerButton,
+        containerWrapper && styles.containerWrapper,
+        containerDetails && styles.containerDetails,
+        barSearch && styles.barSearch,
+    ]
+
+    return (
+        <View style={stylesContainer}>
+            {children}
+        </View>
+    )
+}
+
 const styles = StyleSheet.create({
     containerWrapper: {
         padding: 20,
@@ -29,20 +47,3 @@ const styles = StyleSheet.create({
         gap: 5,
     }
 })
-
-export default function StyledView ({ containerWrapper, containerButton, containerDetails, barSearch, children }) {
-
-    const stylesContainer = [
-        containerWrapper && styles.containerWrapper,
-        containerButton && styles.containerButton,
-        containerWrapper && styles.containerWrapper,
-        containerDetails && styles.containerDetails,
-        barSearch && styles.barSearch,
-    ]
-
-    return (
-        <View style={stylesContainer}>
-            {children}
-        </View>
-    )
-}

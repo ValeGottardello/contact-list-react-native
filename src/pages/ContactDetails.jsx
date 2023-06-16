@@ -1,7 +1,7 @@
 import React from "react";
 import { ScrollView, View, Text, TouchableHighlight } from "react-native";
 import theme from "../style/theme";
-import { useLocation, useParams } from "react-router-native";
+import { useLocation, useParams, useNavigate } from "react-router-native";
 import { Link } from "react-router-native"
 import deleteContacts from "../utils/deleteContacts";
 import Message from "../components/Message";
@@ -12,6 +12,7 @@ import Details from "../components/Details";
 
 export default function ContactDetails () {
     
+    const navigate = useNavigate()
     const location = useLocation()
     const { firstName, lastName, phone, email } = location.state
     const { id } = useParams()
@@ -22,6 +23,7 @@ export default function ContactDetails () {
                 Message('Contact Deleted', 'Contact has been deleted')
             }
         })
+        navigate(`/`)
     }
     
     return (

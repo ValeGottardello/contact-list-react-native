@@ -1,9 +1,8 @@
 import React from "react";
-import { StyleSheet, View, Text, Button} from "react-native";
+import { StyleSheet,Text , View} from "react-native";
 import Constants from "expo-constants";
 import theme from "../style/theme";
 import { Link } from "react-router-native";
-
 
 
 const styles = StyleSheet.create({

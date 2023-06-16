@@ -1,6 +1,6 @@
 import StyledView from "../components/StyledView";
-import { Text, View, Button, TextInput, TouchableHighlight } from "react-native";
-import { useLocation, useParams } from "react-router-native";
+import { Text, View, TextInput, TouchableHighlight } from "react-native";
+import { useLocation, useNavigate, useParams } from "react-router-native";
 import theme from "../style/theme";
 import { useState } from "react";
 import editContact from "../utils/editContact";
@@ -9,6 +9,7 @@ import StyledText from "../components/StyledText";
 
 export default function ContactEdit() {
 
+    const navigate = useNavigate()
     const location = useLocation()
     const { name, lastname, phone, email } = location.state
     const [input, setInput] = useState({
@@ -31,6 +32,7 @@ export default function ContactEdit() {
         if (contactEdited) {
             Message('Contact Edited', 'Contact has been edited')
         }
+        navigate(`/contacts/${id}`, { state: input })
     }
 
     return (

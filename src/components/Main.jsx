@@ -1,7 +1,6 @@
 import React from "react";
-import { NativeRouter, Route, Routes } from 'react-router-native';
+import { Route, Routes } from 'react-router-native';
 import { View } from "react-native";
-import list from "../data/list.js"
 import AppBar from "./AppBar";
 import ContactList from "../pages/ContactList";
 import ContactImport from "../pages/ContactImport";
